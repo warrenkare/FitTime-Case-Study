@@ -10,7 +10,7 @@ __Date:__ January 28, 2024
 
 ![FitTime Logo](https://warrenkare.github.io/FitTime-Case-Study/assets/img/FitTimeLogo2.png)
 
-<sup>_logo generated with DALL•​​E 3 and edited in Photoshop_
+<sup>_logo generated with DALL·​​E 3 and edited in Photoshop_
 
 FitTime is a (fictional) technology manufacturing company focused on creating health products for women. They have developed a smart watch called Flexi that captures fitness and lifestyle activity of its wearers. Using the data gathered on 33 random participants, the company hopes to better understand their customers to make informed decisions on how to better market the product and enhance their customer base.
 
