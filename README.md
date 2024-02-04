@@ -1,10 +1,10 @@
 __[< Back to Portfolio](https://warrenkare.github.io)__
 
-author: Warren Kare
+__Author:__ Warren Kare
 
-date: January 28, 2024
+__Date:__ January 28, 2024
 
-output: html_document
+&nbsp; 
 
 ### Introduction
 
@@ -32,8 +32,6 @@ Note: the dataset used in this case study is [FitBit Fitness Tracker Data](https
 
 Packages needed: _tidyverse_, _lubridate_, and _ggpubr_.
 
-------------------------
-
 Before we dive into the data, we should assess the credibility of the dataset with the __ROCCC__ test.
 
 * __Reliable:__ Data was sourced from Amazon Mechanical Turk, which is a platform that pays participants to partake in surveys. This incentivized system could possibly lead to bias and skewed results.
@@ -48,16 +46,12 @@ Before we dive into the data, we should assess the credibility of the dataset wi
 
 Taking all these factors into consideration, this may not be the best dataset to work with. However, it wouldn't hurt to explore the numbers and see what was observed.
 
-&nbsp;  
-
 ```
 library(tidyverse)
 library(lubridate)
 library(ggpubr)
 ```
 
-
-&nbsp;  
 Next, let's set our directory and create our data frames from the dataset files.
 
 ```
@@ -65,8 +59,7 @@ setwd("/Users/warrenkare/FitTime")
 daily_activity <- read_csv("dailyActivity_merged.csv")
 daily_sleep <- read_csv("sleepDay_merged.csv")
 ```
-
-&nbsp;  
+ 
 Now, let's get a quick glance of our data and ensure the column names and observation formats are consistent, then we can proceed with cleaning our data.
 
 ```
