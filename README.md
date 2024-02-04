@@ -17,7 +17,7 @@ opts_chunk$set(tidy.opts=list(width.cutoff=50),tidy=TRUE)
 
 ### Introduction
 
-![FitTime Logo](https://warrenkare.github.io/FitTime-Case-Study/assets/img/FitTimeLogo.png)
+![FitTime Logo](https://warrenkare.github.io/FitTime-Case-Study/assets/img/FitTimeLogo2.png)
 
 <sup>_logo generated with DALL-E 3 and cleaned in Photoshop_
 
