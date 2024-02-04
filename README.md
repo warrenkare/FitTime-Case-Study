@@ -50,7 +50,8 @@ Taking all these factors into consideration, this may not be the best dataset to
 
 &nbsp;  
 
-```library(tidyverse)
+```
+library(tidyverse)
 library(lubridate)
 library(ggpubr)
 ```
@@ -59,7 +60,8 @@ library(ggpubr)
 &nbsp;  
 Next, let's set our directory and create our data frames from the dataset files.
 
-```setwd("/Users/warrenkare/FitTime")
+```
+setwd("/Users/warrenkare/FitTime")
 daily_activity <- read_csv("dailyActivity_merged.csv")
 daily_sleep <- read_csv("sleepDay_merged.csv")
 ```
@@ -67,7 +69,8 @@ daily_sleep <- read_csv("sleepDay_merged.csv")
 &nbsp;  
 Now, let's get a quick glance of our data and ensure the column names and observation formats are consistent, then we can proceed with cleaning our data.
 
-```head(daily_activity)
+```
+head(daily_activity)
 head(daily_sleep)
 ```
 
@@ -83,19 +86,22 @@ head(daily_sleep)
 &nbsp;  
 __Rename columns:__
 
-```colnames(daily_activity)[2] = "ActivityDay"
+```
+colnames(daily_activity)[2] = "ActivityDay"
 colnames(daily_sleep)[2] = "ActivityDay"
 ```
 
 __Convert ActivityDate from chr to date format:__
 
-```daily_activity$ActivityDay <- mdy(daily_activity$ActivityDay)
+```
+daily_activity$ActivityDay <- mdy(daily_activity$ActivityDay)
 daily_sleep$ActivityDay <- as.Date(mdy_hms(daily_sleep$ActivityDay))
 ```
 
 __Double-check changes were made correctly:__
 
-```head(daily_activity)
+```
+head(daily_activity)
 head(daily_sleep)
 ```
 
@@ -110,7 +116,8 @@ head(daily_sleep)
 &nbsp;  
 All changes successful. Let's do a quick check of the Id's in both tables to ensure there were equal participants in each data collection.
 
-```n_distinct(daily_activity$Id)
+```
+n_distinct(daily_activity$Id)
 n_distinct(daily_sleep$Id)
 ```
 
@@ -120,7 +127,8 @@ n_distinct(daily_sleep$Id)
 
 It appears not all participants were part of the sleep activity. We will keep this in mind when we analyze our data. For now, let's do an inner join of the two tables to cross-reference Activity and Sleep.
 
-```daily_health <- merge(daily_activity, daily_sleep)
+```
+daily_health <- merge(daily_activity, daily_sleep)
 ```
 
 &nbsp;  
@@ -131,7 +139,8 @@ Let's gather insights on the activity levels of our participants. When looking a
 
 #### 1. Is there a relationship between number of steps and calories burned?
 
-```ggplot(data = daily_activity, aes(x=TotalSteps, y=Calories)) + 
+```
+  ggplot(data = daily_activity, aes(x=TotalSteps, y=Calories)) + 
   geom_point() + 
   geom_smooth(method = "loess") + 
   stat_cor(method = "pearson", label.x = 0, label.y = 4600) + 
@@ -146,7 +155,8 @@ We can observe a slightly positive correlation between total steps taken and cal
 
 #### 2. Is there a relationship between number of steps and amount of time spent in bed?
 
-```ggplot(data = daily_health, aes(y=TotalTimeInBed, x=TotalSteps)) + 
+```
+  ggplot(data = daily_health, aes(y=TotalTimeInBed, x=TotalSteps)) + 
   geom_point() + 
   geom_smooth(method = "loess") + 
   stat_cor(method = "pearson", label.x = 0, label.y = 1100) +
@@ -163,11 +173,13 @@ Most of the data points aggregate around the range of 300-600 minutes in bed (ab
 
 In this step, we will create bar graphs to measure the average number of steps and amount of sleep by day of the week. Sleep minutes were converted to sleep hours to increase readability.
 
-```daily_health$DayofWeek <- weekdays(daily_health$ActivityDay)
+```
+daily_health$DayofWeek <- weekdays(daily_health$ActivityDay)
 daily_health$DayofWeek <- factor(daily_health$DayofWeek, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
 ```
 
-```steps_sleep_week <- daily_health %>% 
+```
+  steps_sleep_week <- daily_health %>% 
   group_by(DayofWeek) %>% 
   summarize(AvgSteps = mean(TotalSteps), AvgSleepHours = mean(TotalMinutesAsleep)/60)
 ```
@@ -180,7 +192,8 @@ daily_health$DayofWeek <- factor(daily_health$DayofWeek, levels = c("Monday", "T
 
 ![Steps by Day](https://warrenkare.github.io/FitTime-Case-Study/assets/img/avgstepsweek.png)
 
-```ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSleepHours)) + 
+```
+  ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSleepHours)) + 
   geom_bar(stat = "identity", fill = hcl(201,36,69)) + 
   geom_text(aes(label=round(AvgSleepHours, digits=2)), vjust=5) + 
   labs(x = "Day of Week", y = "Average Sleep Duration (hours)", title = "Sleep Duration by Day of Week")
@@ -204,24 +217,29 @@ daily_health$DayofWeek <- factor(daily_health$DayofWeek, levels = c("Monday", "T
 In this step, we want to find out how much time our customers spent in different activity levels. We will transform the table to properly plot our data. Next, we will convert minutes to hours to make the visuals easier to read.
 
 
-```activetime <- daily_activity[,c("Id", "ActivityDay", "VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes", "SedentaryMinutes")]
+```
+activetime <- daily_activity[,c("Id", "ActivityDay", "VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes", "SedentaryMinutes")]
 ```
 
-```activetime_hours <- activetime %>% 
+```
+  activetime_hours <- activetime %>% 
   mutate(across(c(VeryActiveMinutes, FairlyActiveMinutes, LightlyActiveMinutes, SedentaryMinutes), function(x) x/60)) %>% 
   rename("VeryActive"=VeryActiveMinutes, "FairlyActive" = FairlyActiveMinutes, "LightlyActive" = LightlyActiveMinutes, "Sedentary" = SedentaryMinutes)
 ```
 
-```activetime_long <- activetime_hours %>%
+```
+  activetime_long <- activetime_hours %>%
   pivot_longer(cols = 3:6,
                names_to = "ActivityLevel",
                values_to = "ActivityHours")
 ```
 
-```activetime_long$ActivityLevel <- factor(activetime_long$ActivityLevel, levels = c("Sedentary", "LightlyActive", "FairlyActive", "VeryActive"))
+```
+activetime_long$ActivityLevel <- factor(activetime_long$ActivityLevel, levels = c("Sedentary", "LightlyActive", "FairlyActive", "VeryActive"))
 ```
 
-```ggplot(data = activetime_long, aes(x = ActivityLevel, y = ActivityHours, fill = ActivityLevel)) +
+```
+  ggplot(data = activetime_long, aes(x = ActivityLevel, y = ActivityHours, fill = ActivityLevel)) +
   geom_bar(stat = "identity") + 
   labs(x = "Activity Level", y = "Total Activity Time (hours)", title = "Total Time Spent in Each Activity Level")
 ```
@@ -230,7 +248,8 @@ In this step, we want to find out how much time our customers spent in different
 
 We can see that Sedentary Minutes is extremely high compared to all other levels of activity. Let's explore this further.
 
-```sedentaryhours <- activetime_long %>% 
+```
+  sedentaryhours <- activetime_long %>% 
   summarize(mean(ActivityHours[ActivityLevel=="Sedentary"]))
 print.AsIs(sedentaryhours)
 ```
@@ -241,7 +260,8 @@ print.AsIs(sedentaryhours)
 
 The average duration spent sedentary is about 16.5 hours. Let's compare this to the sleep data.
 
-```sleephours <- summarize(daily_health, mean(TotalMinutesAsleep)/60)
+```
+sleephours <- summarize(daily_health, mean(TotalMinutesAsleep)/60)
 print.AsIs(sleephours)
 ```
 
