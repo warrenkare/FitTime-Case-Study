@@ -140,7 +140,7 @@ Let's gather insights on the activity levels of our participants. When looking a
 #### 1. Is there a relationship between number of steps and calories burned?
 
 ```
-  ggplot(data = daily_activity, aes(x=TotalSteps, y=Calories)) + 
+ggplot(data = daily_activity, aes(x=TotalSteps, y=Calories)) + 
   geom_point() + 
   geom_smooth(method = "loess") + 
   stat_cor(method = "pearson", label.x = 0, label.y = 4600) + 
@@ -156,7 +156,7 @@ We can observe a slightly positive correlation between total steps taken and cal
 #### 2. Is there a relationship between number of steps and amount of time spent in bed?
 
 ```
-  ggplot(data = daily_health, aes(y=TotalTimeInBed, x=TotalSteps)) + 
+ggplot(data = daily_health, aes(y=TotalTimeInBed, x=TotalSteps)) + 
   geom_point() + 
   geom_smooth(method = "loess") + 
   stat_cor(method = "pearson", label.x = 0, label.y = 1100) +
@@ -179,12 +179,13 @@ daily_health$DayofWeek <- factor(daily_health$DayofWeek, levels = c("Monday", "T
 ```
 
 ```
-  steps_sleep_week <- daily_health %>% 
-  group_by(DayofWeek) %>% 
-  summarize(AvgSteps = mean(TotalSteps), AvgSleepHours = mean(TotalMinutesAsleep)/60)
+steps_sleep_week <- daily_health %>% 
+ group_by(DayofWeek) %>% 
+ summarize(AvgSteps = mean(TotalSteps), AvgSleepHours = mean(TotalMinutesAsleep)/60)
 ```
 
-```ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSteps)) + 
+```
+ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSteps)) + 
   geom_bar(stat = "identity", fill = hcl(32,36,69)) + 
   geom_text(aes(label=round(AvgSteps, digits=0)), vjust=5) + 
   labs(x = "Day of Week", y = "Average Number of Steps", title = "Average Steps by Day of Week")
@@ -193,7 +194,7 @@ daily_health$DayofWeek <- factor(daily_health$DayofWeek, levels = c("Monday", "T
 ![Steps by Day](https://warrenkare.github.io/FitTime-Case-Study/assets/img/avgstepsweek.png)
 
 ```
-  ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSleepHours)) + 
+ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSleepHours)) + 
   geom_bar(stat = "identity", fill = hcl(201,36,69)) + 
   geom_text(aes(label=round(AvgSleepHours, digits=2)), vjust=5) + 
   labs(x = "Day of Week", y = "Average Sleep Duration (hours)", title = "Sleep Duration by Day of Week")
@@ -222,13 +223,13 @@ activetime <- daily_activity[,c("Id", "ActivityDay", "VeryActiveMinutes", "Fairl
 ```
 
 ```
-  activetime_hours <- activetime %>% 
+activetime_hours <- activetime %>% 
   mutate(across(c(VeryActiveMinutes, FairlyActiveMinutes, LightlyActiveMinutes, SedentaryMinutes), function(x) x/60)) %>% 
   rename("VeryActive"=VeryActiveMinutes, "FairlyActive" = FairlyActiveMinutes, "LightlyActive" = LightlyActiveMinutes, "Sedentary" = SedentaryMinutes)
 ```
 
 ```
-  activetime_long <- activetime_hours %>%
+activetime_long <- activetime_hours %>%
   pivot_longer(cols = 3:6,
                names_to = "ActivityLevel",
                values_to = "ActivityHours")
@@ -239,7 +240,7 @@ activetime_long$ActivityLevel <- factor(activetime_long$ActivityLevel, levels = 
 ```
 
 ```
-  ggplot(data = activetime_long, aes(x = ActivityLevel, y = ActivityHours, fill = ActivityLevel)) +
+ggplot(data = activetime_long, aes(x = ActivityLevel, y = ActivityHours, fill = ActivityLevel)) +
   geom_bar(stat = "identity") + 
   labs(x = "Activity Level", y = "Total Activity Time (hours)", title = "Total Time Spent in Each Activity Level")
 ```
