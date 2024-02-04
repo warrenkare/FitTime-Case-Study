@@ -1,7 +1,5 @@
 __[< Back to Portfolio](https://warrenkare.github.io)__
 
-# FitTime Case Study
-
 author: Warren Kare
 
 date: January 28, 2024
@@ -19,7 +17,7 @@ opts_chunk$set(tidy.opts=list(width.cutoff=50),tidy=TRUE)
 
 ### Introduction
 
-![FitTime Logo](https://github.com/warrenkare/FitTime-Case-Study/blob/main/assets/img/FitTimeLogo.png)
+![FitTime Logo](https://warrenkare.github.io/FitTime-Case-Study/assets/img/FitTimeLogo.png)
 
 <sup>_logo generated with DALL-E 3 and cleaned in Photoshop_
 
@@ -164,7 +162,7 @@ ggplot(data = daily_activity, aes(x=TotalSteps, y=Calories)) +
   annotate("text", x = 25000, y = 700, label = "Slight positive correlation", color = "red")
 ```
 
-![Steps vs. Calories](https://github.com/warrenkare/FitTime-Case-Study/blob/main/assets/img/stepsvscalories.png)
+![Steps vs. Calories](https://warrenkare.github.io/FitTime-Case-Study/assets/img/stepsvscalories.png)
 
 We can observe a slightly positive correlation between total steps taken and calories burned. It is possible the participants burned calories in ways other than walking or running (ex: weightlifting or other aerobic activity tracked separately from the pedometer feature).
 
@@ -180,7 +178,7 @@ ggplot(data = daily_health, aes(y=TotalTimeInBed, x=TotalSteps)) +
   annotate("text", x = 17800, y = 850, label = "Little to no correlation", color = "red")
 ```
 
-![Steps vs. Bed](https://github.com/warrenkare/FitTime-Case-Study/blob/main/assets/img/stepsvsbed.png)
+![Steps vs. Bed](https://warrenkare.github.io/FitTime-Case-Study/assets/img/stepsvsbed.png)
 
 Most of the data points aggregate around the range of 300-600 minutes in bed (about 5-10 hours), but there does not appear to be a strong correlation between the number of steps taken and total time in bed.
 
@@ -207,7 +205,7 @@ ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSteps)) +
   labs(x = "Day of Week", y = "Average Number of Steps", title = "Average Steps by Day of Week")
 ```
 
-![Steps by Day](https://github.com/warrenkare/FitTime-Case-Study/blob/main/assets/img/avgstepsweek.png)
+![Steps by Day](https://warrenkare.github.io/FitTime-Case-Study/assets/img/avgstepsweek.png)
 
 ```{r sleepbyday_plot}
 ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSleepHours)) + 
@@ -216,7 +214,7 @@ ggplot(data=steps_sleep_week, aes(x = DayofWeek, y=AvgSleepHours)) +
   labs(x = "Day of Week", y = "Average Sleep Duration (hours)", title = "Sleep Duration by Day of Week")
 ```
 
-![Sleep by Day](https://github.com/warrenkare/FitTime-Case-Study/blob/main/assets/img/avgsleepweek.png)
+![Sleep by Day](https://warrenkare.github.io/FitTime-Case-Study/assets/img/avgsleepweek.png)
 
 ##### Observations:
 
@@ -261,7 +259,7 @@ ggplot(data = activetime_long, aes(x = ActivityLevel, y = ActivityHours, fill = 
   labs(x = "Activity Level", y = "Total Activity Time (hours)", title = "Total Time Spent in Each Activity Level")
 ```
 
-![Activity Distribution](https://github.com/warrenkare/FitTime-Case-Study/blob/main/assets/img/activitydist.png)
+![Activity Distribution](https://warrenkare.github.io/FitTime-Case-Study/assets/img/activitydist.png)
 
 We can see that Sedentary Minutes is extremely high compared to all other levels of activity. Let's explore this further.
 
