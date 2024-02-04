@@ -336,3 +336,5 @@ Using the insights from our analysis, here are my recommendations for the data, 
 The dataset used in this analysis was a good first step in gaining insights on our customers. However, it had its limitations that prevented us from getting a complete picture of how our customers use the product. We would benefit from further analyses and team discussions.
 
 Thank you for reading through this case study!
+
+__[< Back to Portfolio](https://warrenkare.github.io)__
