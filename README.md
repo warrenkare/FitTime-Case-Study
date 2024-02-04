@@ -88,6 +88,7 @@ daily_sleep <- read_csv("sleepDay_merged.csv")
 
 &nbsp;  
 Now, let's get a quick glance of our data and ensure the column names and observation formats are consistent, then we can proceed with cleaning our data.
+
 ```{r head}
 head(daily_activity)
 head(daily_sleep)
@@ -104,18 +105,21 @@ head(daily_sleep)
 
 &nbsp;  
 __Rename columns:__
+
 ```{r colrename}
 colnames(daily_activity)[2] = "ActivityDay"
 colnames(daily_sleep)[2] = "ActivityDay"
 ```
 
 __Convert ActivityDate from chr to date format:__
+
 ```{r datefix}
 daily_activity$ActivityDay <- mdy(daily_activity$ActivityDay)
 daily_sleep$ActivityDay <- as.Date(mdy_hms(daily_sleep$ActivityDay))
 ```
 
 __Double-check changes were made correctly:__
+
 ```{r headcheck}
 head(daily_activity)
 head(daily_sleep)
@@ -131,6 +135,7 @@ head(daily_sleep)
 
 &nbsp;  
 All changes successful. Let's do a quick check of the Id's in both tables to ensure there were equal participants in each data collection.
+
 ```{r Idcount}
 n_distinct(daily_activity$Id)
 n_distinct(daily_sleep$Id)
@@ -141,6 +146,7 @@ n_distinct(daily_sleep$Id)
 > [1] 24
 
 It appears not all participants were part of the sleep activity. We will keep this in mind when we analyze our data. For now, let's do an inner join of the two tables to cross-reference Activity and Sleep.
+
 ```{r mergehealth}
 daily_health <- merge(daily_activity, daily_sleep)
 ```
