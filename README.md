@@ -250,7 +250,7 @@ ggplot(data = activetime_long, aes(x = ActivityLevel, y = ActivityHours, fill = 
 We can see that Sedentary Minutes is extremely high compared to all other levels of activity. Let's explore this further.
 
 ```
-  sedentaryhours <- activetime_long %>% 
+sedentaryhours <- activetime_long %>% 
   summarize(mean(ActivityHours[ActivityLevel=="Sedentary"]))
 print.AsIs(sedentaryhours)
 ```
