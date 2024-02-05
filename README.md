@@ -30,7 +30,7 @@ FitTime is a (fictional) technology manufacturing company focused on creating he
 ### Preparing the Data
 Note: the dataset used in this case study is [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) (CC0: Public Domain). 
 
-Packages needed: _tidyverse_, _lubridate_, and _ggpubr_.
+Packages needed: _tidyverse_, _lubridate_, and _ggpubr_. Optional but recommended packages are _formatR_ and _knitr_ to publish the final Markdown.
 
 Before we dive into the data, we should assess the credibility of the dataset with the __ROCCC__ test.
 
